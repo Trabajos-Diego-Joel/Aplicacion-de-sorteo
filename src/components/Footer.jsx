@@ -14,18 +14,18 @@ export default function Footer() {
           <img className="w-20" src={logo} alt="logo" />
           {/* Nav Liks */}
           <div className="flex justify-center items-center gap-20 ml-[20%] ">
-            <Link className="text-lg" to="/">
+            <Link className="text-2xl hover:scale-125 duration-300 font-bold text-transparent bg-gradient-to-r bg-clip-text from-indigo-800 via-fuchsia-600 to-pink-300" to="/">
               Inicio
             </Link>
-            <Link className="text-lg" to="/rank">
+            <Link className="text-2xl hover:scale-125 duration-300 font-bold text-transparent bg-gradient-to-r bg-clip-text from-indigo-800 via-fuchsia-600 to-pink-300" to="/rank">
               Rank
             </Link>
-            <Link className="text-lg" to="/numeros-confirmados">
+            <Link className="text-2xl hover:scale-125 duration-300 font-bold text-transparent bg-gradient-to-r bg-clip-text from-indigo-800 via-fuchsia-600 to-pink-300" to="/numeros-confirmados">
               Numeros Confirmados
             </Link>
           </div>
         </div>
-        <p>
+        <p className="font-semibold">
           © 2023. Derechos Reservados.
         </p>
       </div>
@@ -34,18 +34,18 @@ export default function Footer() {
         {/* Email */}
         <div className="flex items-center gap-4">
           <img className="w-8" src={emailIcon} alt="email" />
-          <a href="#">
+          <a href="#" className="font-semibold">
           info@BR-teamoficial.com
           </a>
         </div>
         {/* WhatsApp */}
         <div className="flex items-center gap-4">
           <img className="w-8" src={wsIcon} alt="email" />
-          <a href="#">
+          <a href="#" className="font-semibold">
           +57 301 000 0000
           </a>
         </div>
-        <p className="mt-6">
+        <p className="mt-6 font-semibold">
         Sorteos realizados por {owner}
         </p>
       </div>
