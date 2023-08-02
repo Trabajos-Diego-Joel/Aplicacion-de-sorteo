@@ -1,5 +1,9 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import iphone from "../assets/iphone14.png";
 import Card from "../components/Card";
+
+import { ticketsQuantity , selectNumber } from "../redux/numberSlice";
 
 // Number Cards.
 const cards_numbers = [1, 2, 3, 4, 10, 20, 50, 100];
@@ -14,6 +18,19 @@ const dateLottery = {
 };
 
 export default function Home() {
+
+  
+  const { tickets } = useSelector((state) => state.numero);
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+
+    
+    dispatch(ticketsQuantity(0));
+    dispatch(selectNumber());
+    
+  }, []);
   return (
     <>
       <div className="md:flex justify-center md:mt-10 ">
