@@ -32,15 +32,24 @@ export default function Card({number}) {
     setHover(false);
   };
 
+  const numberToCurrency = (number) => {
+    return new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(number);
+  };
+
   return (
     <div
-      className={`grid place-items-center w-[16rem] h-[16rem] shadow-lg shadow-indigo-500/50 rounded-xl cursor-pointer hover:text-white transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 ${
+      className={`grid place-items-center relative w-[16rem] h-[16rem] shadow-lg shadow-indigo-500/50 rounded-xl cursor-pointer hover:text-white transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 ${
         hover ? 'hover:bg-gradient-to-r from-indigo-800 via-fuchsia-600 to-pink-300' : 'hover:bg-white'
+        
       }`}
       onMouseEnter={handleHover}
       onMouseLeave={handleLeave}
     >
-      <span
+        <span className={`text-xl font-bold top-5 absolute text-transparent bg-gradient-to-r bg-clip-text from-indigo-800 via-fuchsia-600 to-pink-300 ${
+          hover ?  'from-transparent to-transparent': 'from-indigo-800 via-fuchsia-600 to-pink-300'
+        }`}>{numberToCurrency(number * 20000)}</span>
+
+        <span
         className={`text-8xl font-extrabold text-transparent bg-gradient-to-r bg-clip-text ${
           hover ?  'from-transparent to-transparent': 'from-indigo-800 via-fuchsia-600 to-pink-300'
         }`}
@@ -54,6 +63,7 @@ export default function Card({number}) {
       >
         ¡Adquirir!
       </button>
+     
     </div>
   )
 }

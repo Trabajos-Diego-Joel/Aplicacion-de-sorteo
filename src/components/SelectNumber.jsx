@@ -71,6 +71,7 @@ export default function SelectNumber() {
           return (
             <button
               onClick={(event) => clickButton(event)}
+              disabled = {selectedNumber.length === tickets && !selectedNumber.includes(number)}
               key={number}
               id={number}
               className={
@@ -98,13 +99,14 @@ export default function SelectNumber() {
             Numero De Boletas Seleccionadas: {selectedNumber.length} / {tickets}
           </p>
 
-          <Link
+          <button
+            disabled = {selectedNumber.length < tickets}
             to="resumen-compra/mis-datos"
             onClick={()=> navigate("resumen-compra/mis-datos")}
             className=" border-blue-500 px-10 py-4 text-2xl font-semibold rounded border-4 text-transparent bg-gradient-to-r bg-clip-text from-indigo-800 via-fuchsia-600 to-pink-300 "
           >
             Siguiente
-          </Link>
+          </button>
       </div>
     </>
   );

@@ -1,17 +1,29 @@
 import { useSelector } from "react-redux";
 import { createClient } from "@supabase/supabase-js";
 import { useState } from "react";
+import Swal from 'sweetalert2';
+import { useLocation } from "wouter"
+
 
 // SUpabase Connection.
 const supabase = createClient(
-  "https://oyltvjfmloodupovoqoe.supabase.co",
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im95bHR2amZtbG9vZHVwb3ZvcW9lIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY5MDY2MjgyMSwiZXhwIjoyMDA2MjM4ODIxfQ.SwX21h80-C0yk9K19vk_UerdvH8CwVVSJRrHX9Q8MJA"
+  "https://rnakbdlosebdbhlnqdfz.supabase.co",
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuYWtiZGxvc2ViZGJobG5xZGZ6Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY5MDk5Njg0OCwiZXhwIjoyMDA2NTcyODQ4fQ.NNo5G0oRWxJCTUswBFkWYrGmB1Qtg_6tiqi_JX0_PsA"
 );
 
 export default function FormData() {
+
+  const [location, navigate ] = useLocation()
+
+
   const { selectedNumber, tickets } = useSelector(
     (state) => state.numero
   );
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = now.getMonth() + 1; // Los meses en JavaScript van de 0 a 11, por lo que sumamos 1 para obtener el mes actual.
+  const day = now.getDate();
+  console.log(`${day}-${month}-${year}`);
 
   const [selectedFile, setSelectedFile] = useState(null);
 
@@ -29,6 +41,12 @@ export default function FormData() {
       description: "Solo transferencias bancarias",
       important: true,
     },
+    {
+      name: "Bancolombia",
+      number: "1231231231231",
+      descripcion: "Solo transferencias bancarias",
+      important: true
+    }
   ];
 
   const handleFileChange = (e) => {
@@ -50,12 +68,15 @@ export default function FormData() {
       email:email,
       number:whatsapp,
       city:city,
-      numbers: selectedNumber
+      numbers: selectedNumber,
+      monto: numberToCurrency(tickets * 20000)
     };
     if (selectedFile) {
       try {
         // Subir la imagen a Supabase Storage y esperar a que se complete la subida
-        const fileData = await supabase.storage.from('users').upload(full_name + document + ".png", selectedFile);
+        const fileData = await supabase.storage.from('users').upload(full_name, selectedFile);
+        
+        console.log(selectedFile)
   
         // Obtener la URL pública con expiración de una semana (604800 segundos)
         const { data, error } = await supabase.storage.from('users').createSignedUrl(fileData.data?.path, 604800);
@@ -64,26 +85,26 @@ export default function FormData() {
           console.error('Error al obtener la URL firmada:', error);
         } else {
           formData.screenshot = data.signedUrl; // Agregar la URL firmada de la imagen en el campo 'screenshot' del formData
+        
         }
+
+        await supabase.from("users").insert([formData]);
+      Swal.fire(
+        'Registrado!',
+        'Se ha realizado un registro exitoso, a continuación podras escoger los números, presiona "OK"',
+        'success',
+      )
+
+      setTimeout(() => navigate("", { replace: true }), 2000)
       } catch (error) {
         console.log('Error al subir la imagen:', error);
       }
     }
 
-    try {
-
-      await supabase.from("users").insert([formData]);
-      
-    } catch (error) {
-
-      console.log(error)
-      
-    }
-  
-
-  
   };
-
+  const numberToCurrency = (number) => {
+    return new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(number);
+  };
   
 
   return (
@@ -109,7 +130,7 @@ export default function FormData() {
         {/* Payment date */}
         <div className="my-4">
           <h3 className="text-black font-bold">FECHA DE PAGO</h3>
-          <span className="text-slate-600 pl-2">2023-10-23</span>
+          <span className="text-slate-600 pl-2">{`${day}-${month}-${year}`}</span>
         </div>
 
         {/*  Payment Detail */}
@@ -118,7 +139,7 @@ export default function FormData() {
           <p className="text-slate-600 pl-2">
             {tickets} numeros para la rifa {rifa}
           </p>
-          <span className="text-black pl-2">$30.000</span>
+          <span className="text-black pl-2">{numberToCurrency(tickets * 20000)}</span>
         </div>
 
         <div className="bg-gray-300 h-[0.5px] my-2 "></div>
@@ -196,7 +217,8 @@ export default function FormData() {
         />
         <button
           type="submit"
-          className=" border-blue-500 px-10 py-4 text-2xl font-semibold rounded border-4 text-transparent bg-gradient-to-r bg-clip-text from-indigo-800 via-fuchsia-600 to-pink-300 "
+          className=" border-blue-500 px-10 py-4 text-2xl font-semibold rounded border-4 text-transparent bg-gradient-to-r bg-clip-text from-indigo-800 via-fuchsia-600 to-pink-300"
+       
         >
           Comprar
         </button>
