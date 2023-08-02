@@ -7,16 +7,21 @@ import { supabase } from "../db";
 
 // Functionalities.
 
-// Numbers Data.
-let { data: users, error } = await supabase
+const getData = async () => {
+  // Numbers Data.
+  let { data: users, error } = await supabase
   .from("users")
   .select("numbers")
   .eq("validated", "true");
 
+  return users
+
+}
+
 // Concatenate all arrays into one.
 let listica_db = [];
-users?.map((user) => {
-  listica_db = listica_db.concat(user.numbers);
+getData?.map((user) => {
+listica_db = listica_db.concat(user.numbers);
 });
 
 // Range Calculate.
