@@ -2,27 +2,13 @@ import { selectNumber } from "../redux/numberSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "wouter";
 import { supabase } from "../db";
+import { useEffect, useState } from "react";
 
 
 
 // Functionalities.
 
-const getData = async () => {
-  // Numbers Data.
-  let { data: users, error } = await supabase
-  .from("users")
-  .select("numbers")
-  .eq("validated", "true");
 
-  return users
-
-}
-
-// Concatenate all arrays into one.
-let listica_db = [];
-getData?.map((user) => {
-listica_db = listica_db.concat(user.numbers);
-});
 
 // Range Calculate.
 function* range(start, end) {
@@ -49,6 +35,30 @@ export default function SelectNumber() {
 
   // Navigate.
   const [location , navigate ] = useLocation()
+
+  const [dataUsers, setDataUsers] = useState([]);
+
+
+  const getData = async () => {
+    // Numbers Data.
+    let { data: users, error } = await supabase
+    .from("users")
+    .select("numbers")
+    .eq("validated", "true");
+  
+    setDataUsers(users)
+  
+  }
+  
+  useEffect(() => {
+    getData()
+  }, []);
+  
+  // Concatenate all arrays into one.
+  let listica_db = [];
+  dataUsers?.map((user) => {
+  listica_db = listica_db.concat(user.numbers);
+  });
 
   return (
     <>
