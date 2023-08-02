@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-import { createClient } from "@supabase/supabase-js";
-=======
-
->>>>>>> 43214799c869e63a45f6b82c54a7e30c5ca8cf55
 import { selectNumber } from "../redux/numberSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "wouter";
