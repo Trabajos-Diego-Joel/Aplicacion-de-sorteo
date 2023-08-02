@@ -1,5 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
-import { selectNumber } from "../redux/NumberSlice";
+import { selectNumber } from "../redux/numberSlice";
 import { useDispatch, useSelector } from "react-redux";
 // SUpabase Connection.
 const supabase = createClient(
