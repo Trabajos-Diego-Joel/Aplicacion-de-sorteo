@@ -1,11 +1,14 @@
+<<<<<<< HEAD
 import { createClient } from "@supabase/supabase-js";
+=======
+
+>>>>>>> 43214799c869e63a45f6b82c54a7e30c5ca8cf55
 import { selectNumber } from "../redux/numberSlice";
 import { useDispatch, useSelector } from "react-redux";
-// SUpabase Connection.
-const supabase = createClient(
-  "https://oyltvjfmloodupovoqoe.supabase.co",
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im95bHR2amZtbG9vZHVwb3ZvcW9lIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY5MDY2MjgyMSwiZXhwIjoyMDA2MjM4ODIxfQ.SwX21h80-C0yk9K19vk_UerdvH8CwVVSJRrHX9Q8MJA"
-);
+import { Link, useLocation } from "wouter";
+import { supabase } from "../db";
+
+
 
 // Functionalities.
 
@@ -17,7 +20,7 @@ let { data: users, error } = await supabase
 
 // Concatenate all arrays into one.
 let listica_db = [];
-users.map((user) => {
+users?.map((user) => {
   listica_db = listica_db.concat(user.numbers);
 });
 
@@ -30,20 +33,22 @@ function* range(start, end) {
   }
 }
 
-
-
 export default function SelectNumber() {
 
-  const {selectedNumber} = useSelector(state => state.numero)
- 
-  const dispatch = useDispatch()
-// Range from DataBase.
-const numbers = [...range(0, 999)];
+  // Global State.
+  const { selectedNumber , tickets } = useSelector((state) => state.numero);
 
-const clickButton = (event) => {
-  // Save data in global state.
-  dispatch(selectNumber(event.target.id))
-};
+  const dispatch = useDispatch();
+  // Range from DataBase.
+  const numbers = [...range(0, 999)];
+
+  const clickButton = (event) => {
+    // Save data in global state.
+    dispatch(selectNumber(event.target.id));
+  };
+
+  // Navigate.
+  const [location , navigate ] = useLocation()
 
   return (
     <>
@@ -53,10 +58,10 @@ const clickButton = (event) => {
       >
         ¿Cuál Será tu Número Ganador? Elige Ahora
       </h1>
-    
-      <div className=" container-scroll grid grid-cols-10 text-white h-[50vh] overflow-y-scroll px-24  place-items-center gap-4 w-[80%]">
+
+      <div className=" grid grid-cols-10 text-white h-[50vh] overflow-y-scroll px-24  place-items-center gap-4 w-[80%]">
         {numbers.map((number) => {
-          if (listica_db.includes(number) ) {
+          if (listica_db.includes(number)) {
             return (
               <button
                 onClick={(event) => clickButton(event)}
@@ -74,7 +79,9 @@ const clickButton = (event) => {
               key={number}
               id={number}
               className={
-                selectedNumber.includes(number) ? "w-20 h-8 bg-green-600" : "w-20 h-8 bg-red-600"
+                selectedNumber.includes(number)
+                  ? "w-20 h-8 bg-green-600"
+                  : "w-20 h-8 bg-red-600"
               }
             >
               {number}
@@ -82,26 +89,27 @@ const clickButton = (event) => {
           );
         })}
       </div>
-      <div className="flex pt-10 justify-between items-center gap-16">
-        <div className="">
-        <a
-            href="#second"
-            className="md:ml-10 ml-20 border-blue-500 px-10 py-4 text-2xl font-semibold rounded border-4 text-transparent bg-gradient-to-r bg-clip-text from-indigo-800 via-fuchsia-600 to-pink-300 "
+      <div className="flex pt-10 justify-centeer items-center ">
+      
+          <Link
+            to=""
+            onClick={()=>navigate("", { replace: true })}
+            className="border-blue-500 px-10 py-4 text-2xl font-semibold rounded border-4 text-transparent bg-gradient-to-r bg-clip-text from-indigo-800 via-fuchsia-600 to-pink-300 "
           >
             Atras
-          </a>
-        </div>
-        <div className="pb-8">
-        <p className="font-semibold text-2xl text-transparent bg-gradient-to-r bg-clip-text from-indigo-800 via-fuchsia-600 to-pink-300 my-14 ">Numero De Boletas Seleccionadas {selectedNumber.length}</p>
-      </div>
-        <div className="">
-        <a
-            href="#second"
-            className="md:ml-10 ml-20 border-blue-500 px-10 py-4 text-2xl font-semibold rounded border-4 text-transparent bg-gradient-to-r bg-clip-text from-indigo-800 via-fuchsia-600 to-pink-300 "
+          </Link>
+
+          <p className="font-semibold text-2xl  text-center mx-20">
+            Numero De Boletas Seleccionadas: {selectedNumber.length} / {tickets}
+          </p>
+
+          <Link
+            to="resumen-compra/mis-datos"
+            onClick={()=> navigate("resumen-compra/mis-datos")}
+            className=" border-blue-500 px-10 py-4 text-2xl font-semibold rounded border-4 text-transparent bg-gradient-to-r bg-clip-text from-indigo-800 via-fuchsia-600 to-pink-300 "
           >
-            Comprar
-          </a>
-        </div>
+            Siguiente
+          </Link>
       </div>
     </>
   );

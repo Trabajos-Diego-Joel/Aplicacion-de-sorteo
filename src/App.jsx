@@ -6,6 +6,7 @@ import ConfirmedNumbers from "./pages/ConfirmedNumbers";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Detail from "./pages/Detail";
+import FormData from "./components/Form";
 
 function App() {
   return (
@@ -29,6 +30,9 @@ function App() {
 
         <Route path="resumen-compra">
           <Detail />
+        </Route>
+        <Route path="resumen-compra/mis-datos">
+          <FormData />
         </Route>
 
 
