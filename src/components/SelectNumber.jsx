@@ -1,7 +1,13 @@
+import { createClient } from "@supabase/supabase-js";
 import { selectNumber } from "../redux/numberSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "wouter";
-import { supabase } from "../db";
+
+
+const supabase = createClient(
+  "https://oyltvjfmloodupovoqoe.supabase.co",
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im95bHR2amZtbG9vZHVwb3ZvcW9lIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY5MDY2MjgyMSwiZXhwIjoyMDA2MjM4ODIxfQ.SwX21h80-C0yk9K19vk_UerdvH8CwVVSJRrHX9Q8MJA"
+);
 
 
 
@@ -19,14 +25,17 @@ users?.map((user) => {
   listica_db = listica_db.concat(user.numbers);
 });
 
-// Range Calculate.
+
+
 function* range(start, end) {
   for (let i = start; i <= end; i++) {
-    // Si el número es menor que 10, agrega un cero a la izquierda
-    const formattedNumber = i < 10 ? `0${i}` : `${i}`;
+    // Si el número es menor que 10, agrega dos ceros a la izquierda
+    // Si el número es menor que 100, agrega un cero a la izquierda
+    const formattedNumber = i < 10 ? `00${i}` : i < 100 ? `0${i}` : `${i}`;
     yield formattedNumber;
   }
 }
+
 
 export default function SelectNumber() {
 
@@ -59,6 +68,7 @@ export default function SelectNumber() {
           if (listica_db.includes(number)) {
             return (
               <button
+              disabled
                 onClick={(event) => clickButton(event)}
                 key={number}
                 id={number}

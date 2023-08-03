@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { User } from "../user"
 import { useEffect } from "react";
 
 import { createClient } from "@supabase/supabase-js";
@@ -23,7 +22,8 @@ export default function Rank() {
   async function getCountries() {
     let { data: users, error } = await supabase
     .from('users')
-    .select("*");
+    .select("*")
+    .eq('validated', true);
   
   // Filtrar aquellos usuarios cuyo array tenga al menos un número
   users = users.filter((user) => user.numbers && user.numbers.length > 0);
@@ -35,14 +35,6 @@ export default function Rank() {
   const topFiveUsers = users.slice(0, 30);
     setData(topFiveUsers)
   }
-
-
-  function compareByNumerosLength(userA, userB) {
-    return userB.numeros.length - userA.numeros.length;
-  }
-  User.sort(compareByNumerosLength);
-
-  const sortedUser = [...User].sort(compareByNumerosLength);
 
   const numberToCurrency = (number) => {
     return new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(number);
