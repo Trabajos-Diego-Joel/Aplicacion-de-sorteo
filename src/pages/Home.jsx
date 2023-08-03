@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import iphone from "../assets/iphone14.png";
 import Card from "../components/Card";
 
 import { ticketsQuantity , selectNumber } from "../redux/numberSlice";
@@ -18,9 +17,6 @@ const dateLottery = {
 };
 
 export default function Home() {
-
-  
-  const { tickets } = useSelector((state) => state.numero);
 
   const dispatch = useDispatch()
 
@@ -60,7 +56,7 @@ export default function Home() {
         <div className="md:w-2/5 pl-14 flex justify-center flex-grow items-center">
           <img
             className="md:w-[65%] w-[40%] pt-16 hover:scale-125 duration-300"
-            src={iphone}
+            src="https://oyltvjfmloodupovoqoe.supabase.co/storage/v1/object/sign/website/iphone14.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJ3ZWJzaXRlL2lwaG9uZTE0LnBuZyIsImlhdCI6MTY5MTA3NzI5MCwiZXhwIjoxNzIyNjEzMjkwfQ.aPZt66XQ5REjYBVuNdpW9styP5tucj21Fs36t02_cY4&t=2023-08-03T15%3A38%3A15.654Z"
             alt="iphone-14"
           />
         </div>
@@ -74,7 +70,7 @@ export default function Home() {
           id="second"
           className="w-full  text-center text-4xl font-bold text-transparent bg-gradient-to-r bg-clip-text from-indigo-800 via-fuchsia-600 to-pink-300"
         >
-          HAZ REALIDAD TUS SUEÑOS, ELIGE TUS NÚMEROS
+          Haz realidad tus sueños, elige tus números.
         </h1>
         {/* Numbers Container */}
         <div className="md:grid md:grid-cols-4 flex flex-col justify-center md:mt-10 md:h-screen w-full px-[10%] py-20 place-items-center">
