@@ -2,28 +2,23 @@ import { createClient } from "@supabase/supabase-js";
 import { selectNumber } from "../redux/numberSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "wouter";
+<<<<<<< HEAD
 
 
 const supabase = createClient(
   "https://oyltvjfmloodupovoqoe.supabase.co",
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im95bHR2amZtbG9vZHVwb3ZvcW9lIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY5MDY2MjgyMSwiZXhwIjoyMDA2MjM4ODIxfQ.SwX21h80-C0yk9K19vk_UerdvH8CwVVSJRrHX9Q8MJA"
 );
+=======
+import { supabase } from "../db";
+import { useEffect, useState } from "react";
+>>>>>>> 33436c56c7db9049f3691c4ecd88588d4e454089
 
 
 
 // Functionalities.
 
-// Numbers Data.
-let { data: users, error } = await supabase
-  .from("users")
-  .select("numbers")
-  .eq("validated", "true");
 
-// Concatenate all arrays into one.
-let listica_db = [];
-users?.map((user) => {
-  listica_db = listica_db.concat(user.numbers);
-});
 
 
 
@@ -53,6 +48,30 @@ export default function SelectNumber() {
 
   // Navigate.
   const [location , navigate ] = useLocation()
+
+  const [dataUsers, setDataUsers] = useState([]);
+
+
+  const getData = async () => {
+    // Numbers Data.
+    let { data: users, error } = await supabase
+    .from("users")
+    .select("numbers")
+    .eq("validated", "true");
+  
+    setDataUsers(users)
+  
+  }
+  
+  useEffect(() => {
+    getData()
+  }, []);
+  
+  // Concatenate all arrays into one.
+  let listica_db = [];
+  dataUsers?.map((user) => {
+  listica_db = listica_db.concat(user.numbers);
+  });
 
   return (
     <>
