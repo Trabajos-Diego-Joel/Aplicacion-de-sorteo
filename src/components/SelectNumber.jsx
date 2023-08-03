@@ -2,17 +2,13 @@ import { createClient } from "@supabase/supabase-js";
 import { selectNumber } from "../redux/numberSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "wouter";
-<<<<<<< HEAD
-
 
 const supabase = createClient(
   "https://oyltvjfmloodupovoqoe.supabase.co",
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im95bHR2amZtbG9vZHVwb3ZvcW9lIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY5MDY2MjgyMSwiZXhwIjoyMDA2MjM4ODIxfQ.SwX21h80-C0yk9K19vk_UerdvH8CwVVSJRrHX9Q8MJA"
 );
-=======
-import { supabase } from "../db";
+
 import { useEffect, useState } from "react";
->>>>>>> 33436c56c7db9049f3691c4ecd88588d4e454089
 
 
 
