@@ -4,6 +4,11 @@ import { useState } from "react";
 import Swal from 'sweetalert2';
 import { useLocation } from "wouter"
 
+// UUID para generar un ID único para cada imagen
+import { v4 as uuidv4 } from 'uuid';
+
+
+
 
 // SUpabase Connection.
 const supabase = createClient(
@@ -21,7 +26,7 @@ export default function FormData() {
   );
   const now = new Date();
   const year = now.getFullYear();
-  const month = now.getMonth() + 1; // Los meses en JavaScript van de 0 a 11, por lo que sumamos 1 para obtener el mes actual.
+  const month = now.getMonth() + 1;
   const day = now.getDate();
 
   const [selectedFile, setSelectedFile] = useState(null);
@@ -72,25 +77,20 @@ export default function FormData() {
     };
     if (selectedFile) {
       try {
-        // Subir la imagen a Supabase Storage y esperar a que se complete la subida
-        const fileData = await supabase.storage.from('users').upload(full_name, selectedFile);
-        
-        console.log(selectedFile)
-  
-        // Obtener la URL pública con expiración de una semana (604800 segundos)
+        const fileData = await supabase.storage.from('users').upload(full_name.trim() + `${day}-${month}-${year}` + uuidv4(), selectedFile);
+
         const { data, error } = await supabase.storage.from('users').createSignedUrl(fileData.data?.path, 604800);
   
         if (error) {
           console.error('Error al obtener la URL firmada:', error);
         } else {
-          formData.screenshot = data.signedUrl; // Agregar la URL firmada de la imagen en el campo 'screenshot' del formData
-        
+          formData.screenshot = data.signedUrl;
         }
 
         await supabase.from("users").insert([formData]);
       Swal.fire(
-        'Registrado!',
-        'Se ha realizado un registro exitoso, a continuación podras escoger los números, presiona "OK"',
+        '¡Gracias por participar en la rifa del iPhone 11 Pro Max!',
+        'Hemos recibido tu compra con éxito y tu número de rifa ha sido reservado. Pronto recibirás una notificación por WhatsApp con los detalles de tu participación.',
         'success',
       )
 
