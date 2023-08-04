@@ -14,10 +14,6 @@ import { useEffect, useState } from "react";
 
 // Functionalities.
 
-
-
-
-
 function* range(start, end) {
   for (let i = start; i <= end; i++) {
     // Si el número es menor que 10, agrega dos ceros a la izquierda
@@ -96,13 +92,13 @@ export default function SelectNumber() {
           return (
             <button
               onClick={(event) => clickButton(event)}
-              disabled = {selectedNumber.length === tickets && !selectedNumber.includes(number)}
+              disabled = {selectedNumber.length === tickets && tickets !== 0 && !selectedNumber.includes(number)}
               key={number}
               id={number}
               className={
                 selectedNumber.includes(number)
-                  ? "w-20 h-8 bg-green-600"
-                  : "w-20 h-8 bg-red-600"
+                  ? "w-20 h-8 bg-green-600 rounded"
+                  : "w-20 h-8 bg-red-600 rounded"
               }
             >
               {number}
@@ -124,13 +120,13 @@ export default function SelectNumber() {
 
         <div className="md:pb-0 pb-12">
         <p className="font-semibold md:text-2xl text-center md:mx-20">
-            Numero De Boletas Seleccionadas: {selectedNumber.length} / {tickets}
+            Numero De Boletas Seleccionadas: {selectedNumber.length} {tickets !== 0 ? `/ ${tickets}`: "Boletas"}
           </p>
         </div>
 
           <div className="md:pb-0 md:ml-0 ml-20 pb-12">
           <button
-            disabled = {selectedNumber.length < tickets}
+            disabled = {selectedNumber.length === 0 && selectedNumber.length < tickets && tickets !== 0 }
             to="resumen-compra/mis-datos"
             onClick={()=> navigate("resumen-compra/mis-datos")}
             className=" border-blue-500 px-10 py-4 text-2xl font-semibold rounded border-4 text-transparent bg-gradient-to-r bg-clip-text from-indigo-800 via-fuchsia-600 to-pink-300 "
