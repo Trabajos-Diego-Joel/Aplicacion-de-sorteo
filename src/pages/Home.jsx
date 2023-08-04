@@ -33,18 +33,18 @@ export default function Home() {
   }, []);
   return (
     <>
-      <div className="md:flex justify-center md:mt-10 ">
+      <div className="md:flex items-center justify-center md:mt-10 ">
         {/* Text */}
-        <div className="md:w-3/5 w-4/5  md:pl-32">
+        <div className="md:w-3/5 w-4/5 md:pl-32">
           {/* Title */}
-          <h1 className="md:text-6xl font-bold w-full pt-8 ml-16 md:font-bold md:pt-10 text-4xl text-transparent bg-gradient-to-r bg-clip-text from-indigo-800 via-fuchsia-600 to-pink-300">
-            ¡Participa y Gana un iPhone 14 pro max en Nuestra Gran Rifa!
+          <h1 className="md:text-6xl text-2xl font-bold w-full pt-8 ml-16 md:font-bold md:pt-10 text-transparent bg-gradient-to-r bg-clip-text from-indigo-800 via-fuchsia-600 to-pink-300">
+            ¡Participa y gana un iPhone 14 pro max en nuestra gran rifa!
           </h1>
 
           {/* Description */}
-          <p className="md:my-14 my-10  text-xl md:pl-10 pl-20 md:text-2xl text-[#656565]">
+          <p className="md:my-14 my-10 text-xl md:pl-10 pl-16 md:text-xl text-[#656565]">
             ¡Participa en nuestra rifa y podrías ganar un iPhone 14 pro max!
-            Obtén tu boleto ahora para tener la oportunidad de disfrutar este
+            obtén tu boleto ahora para tener la oportunidad de disfrutar este
             increíble teléfono inteligente de Apple. ¡No te lo pierdas!
           </p>
           {/* Button */}
@@ -57,7 +57,7 @@ export default function Home() {
         </div>
 
         {/* Phone Image */}
-        <div className="md:w-2/5 pl-14 flex justify-center flex-grow items-center">
+        <div className="md:w-2/5 md:pl-14 flex justify-center flex-grow items-center">
           <img
             className="md:w-[65%] w-[40%] pt-16 hover:scale-125 duration-300"
             src={iphone}
@@ -68,16 +68,16 @@ export default function Home() {
 
       {/* Second Section */}
       {/* Second Section */}
-      <div className="flex flex-col justify-center mt-20">
+      <div className="flex flex-col  justify-center mt-20">
         {/* Title */}
         <h1
           id="second"
-          className="w-full  text-center text-4xl font-bold text-transparent bg-gradient-to-r bg-clip-text from-indigo-800 via-fuchsia-600 to-pink-300"
+          className="md:w-full  px-4 text-center md:text-4xl text-2xl font-bold text-transparent bg-gradient-to-r bg-clip-text from-indigo-800 via-fuchsia-600 to-pink-300"
         >
-          HAZ REALIDAD TUS SUEÑOS, ELIGE TUS NÚMEROS
+          Haz realidad tus sueños, elije tus numeros
         </h1>
         {/* Numbers Container */}
-        <div className="md:grid md:grid-cols-4 flex flex-col justify-center md:mt-10 md:h-screen w-full px-[10%] py-20 place-items-center">
+        <div className="md:grid md:grid-cols-4 flex flex-col justify-center md:mt-10 md:h-screen md:w-full md:px-[10%] py-20 place-items-center">
           {cards_numbers.map((number) => (
             <Card key={number} number={number} />
           ))}
@@ -94,10 +94,10 @@ export default function Home() {
       </div>
 
       {/* Third Section */}
-      <div className="mt-20 h-[80vh] bg-senior bg-cover bg-no-repeat text-white px-20 py-20">
+      <div className="mt-20 md:h-[80vh] h-[60vh] bg-senior bg-cover bg-no-repeat text-white md:px-20 px-6 md:py-20 py-10">
         {/* Title */}
         <h1 className="md:w-3/5 md:text-4xl w-full text-xl font-bold md:mb-40 mb-20  ">
-          ¿Quién se llevará el iPhone 14 Pro Max? Comprueba el Avance de la Rifa
+          ¿Quién se llevará el iPhone 14 Pro Max? comprueba el avance de la rifa
         </h1>
 
         {/* Progress bar */}

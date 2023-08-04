@@ -10,7 +10,7 @@ import FormData from "./components/Form";
 
 function App() {
   return (
-    <>
+    < >
       {/* Navbar */}
       <Navbar />
       {/* Router */}

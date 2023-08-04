@@ -38,7 +38,7 @@ export default function Card({number}) {
 
   return (
     <div
-      className={`grid place-items-center relative w-[16rem] h-[16rem] shadow-lg shadow-indigo-500/50 rounded-xl cursor-pointer hover:text-white transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 ${
+      className={`grid place-items-center md:mt-5 mt-10 relative  w-[16rem]  h-[16rem] shadow-lg shadow-indigo-500/50 rounded-xl cursor-pointer hover:text-white transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 ${
         hover ? 'hover:bg-gradient-to-r from-indigo-800 via-fuchsia-600 to-pink-300' : 'hover:bg-white'
         
       }`}

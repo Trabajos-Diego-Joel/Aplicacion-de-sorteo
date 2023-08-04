@@ -23,7 +23,6 @@ export default function FormData() {
   const year = now.getFullYear();
   const month = now.getMonth() + 1; // Los meses en JavaScript van de 0 a 11, por lo que sumamos 1 para obtener el mes actual.
   const day = now.getDate();
-  console.log(`${day}-${month}-${year}`);
 
   const [selectedFile, setSelectedFile] = useState(null);
 
@@ -43,8 +42,8 @@ export default function FormData() {
     },
     {
       name: "Bancolombia",
-      number: "1231231231231",
-      descripcion: "Solo transferencias bancarias",
+      number: "30175353553",
+      description: "Solo transferencias bancarias",
       important: true
     }
   ];
@@ -108,8 +107,8 @@ export default function FormData() {
   
 
   return (
-    <div className="flex justify-center px-20 py-20 ">
-      <div className="px-10 py-10 w-1/4 border-r-2 border-gray-300">
+    <div className="md:flex  md:justify-center md:px-20 md:py-20 px-5 py-0">
+      <div className="md:px-10 py-10 md:w-1/4 border-r-2 md:border-gray-300">
         {/* Selected Numbers */}
         <div className="py-2">
           <h3 className="text-black font-bold">NUMEROS SELECCIONADOS</h3>
@@ -125,7 +124,7 @@ export default function FormData() {
           </div>
         </div>
 
-        <div className="bg-gray-300 -400 h-[0.5px] my-2"></div>
+        <div className="md:bg-gray-300-400 my-0 md:h-[0.5px] md:my-2"></div>
 
         {/* Payment date */}
         <div className="my-4">
@@ -160,11 +159,11 @@ export default function FormData() {
         ))}
       </div>
       <form
-        className="flex flex-col justify-center items-center gap-4 w-2/4 px-20"
+        className="md:flex md:flex-col md:justify-center md:items-center md:gap-4 md:w-2/4 md:px-20 px-0"
         onSubmit={setFormData}
       >
         {/* Document */}
-        <div className=" flex  w-full gap-4  ">
+        <div className="flex  w-full gap-4  md:pb-0 pb-4">
           <input
             className="w-[100%] border-2  px-4 py-4  text-lg "
             type="text"
@@ -174,7 +173,7 @@ export default function FormData() {
           />
         </div>
 
-        <div className=" flex  w-full gap-4">
+        <div className="flex  w-full md:gap-4 gap-1 md:pb-0 pb-4">
           <input
             className="w-[50%] border-2 px-4 py-4  text-lg "
             type="text"
@@ -191,9 +190,9 @@ export default function FormData() {
           />
         </div>
 
-        <div className="flex flex gap-4 w-full">
+        <div className="flex  w-full md:gap-4 gap-1 md:pb-0 pb-4 ">
           <input
-            className="w-[50%] border-2  px-8 py-4  text-lg "
+            className="w-[50%] border-2 px-4 py-4  text-lg "
             type="text"
             placeholder="Whatsapp*"
             name="whatsapp"
@@ -207,21 +206,25 @@ export default function FormData() {
             required
           />
         </div>
-        <input
-          className="w-full border-2 mx-2 px-8 py-4  text-lg "
+              <div className="md:pb-0 pb-4 ">
+              <input
+          className="w-full border-2  px-8 py-4  text-lg  "
           type="file"
           placeholder="Constancia de Pago*"
           name="invoice"
           onChange={handleFileChange}
           required
         />
-        <button
+              </div>
+      <div className="md:pb-0 pb-4 flex justify-center">
+      <button
           type="submit"
-          className=" border-blue-500 px-10 py-4 text-2xl font-semibold rounded border-4 text-transparent bg-gradient-to-r bg-clip-text from-indigo-800 via-fuchsia-600 to-pink-300"
+          className=" border-blue-500 md:px-10 p-4 py-4 text-2xl font-semibold rounded border-4 text-transparent bg-gradient-to-r bg-clip-text from-indigo-800 via-fuchsia-600 to-pink-300"
        
         >
           Comprar
         </button>
+      </div>
       </form>
     </div>
   );

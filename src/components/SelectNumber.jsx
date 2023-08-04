@@ -73,12 +73,12 @@ export default function SelectNumber() {
     <>
       <h1
         id="second"
-        className="w-full  text-center text-4xl font-bold text-transparent bg-gradient-to-r bg-clip-text from-indigo-800 via-fuchsia-600 to-pink-300 my-10"
+        className="md:w-full  text-center md:text-4xl font-bold text-transparent bg-gradient-to-r bg-clip-text from-indigo-800 via-fuchsia-600 to-pink-300 my-10"
       >
         ¿Cuál Será tu Número Ganador? Elige Ahora
       </h1>
 
-      <div className=" grid grid-cols-10 text-white h-[50vh] overflow-y-scroll px-24  place-items-center gap-4 w-[80%]">
+      <div className="grid grid-cols-4 md:grid md:grid-cols-10 text-white md:h-[50vh] overflow-y-scroll md:px-24  place-items-center gap-4 md:w-[80%]">
         {numbers.map((number) => {
           if (listica_db.includes(number)) {
             return (
@@ -110,20 +110,25 @@ export default function SelectNumber() {
           );
         })}
       </div>
-      <div className="flex pt-10 justify-centeer items-center ">
+      <div className="md:flex items-center md:pt-10 pt-16 md:justify-centeer md:items-center ">
       
-          <Link
+         <div className="md:pb-0 md:ml-0 ml-28 pb-12">
+         <Link
             to=""
             onClick={()=>navigate("", { replace: true })}
             className="border-blue-500 px-10 py-4 text-2xl font-semibold rounded border-4 text-transparent bg-gradient-to-r bg-clip-text from-indigo-800 via-fuchsia-600 to-pink-300 "
           >
             Atras
           </Link>
+         </div>
 
-          <p className="font-semibold text-2xl  text-center mx-20">
+        <div className="md:pb-0 pb-12">
+        <p className="font-semibold md:text-2xl text-center md:mx-20">
             Numero De Boletas Seleccionadas: {selectedNumber.length} / {tickets}
           </p>
+        </div>
 
+          <div className="md:pb-0 md:ml-0 ml-20 pb-12">
           <button
             disabled = {selectedNumber.length < tickets}
             to="resumen-compra/mis-datos"
@@ -132,6 +137,7 @@ export default function SelectNumber() {
           >
             Siguiente
           </button>
+          </div>
       </div>
     </>
   );
